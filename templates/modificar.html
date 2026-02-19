@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block container %}
+
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
+            Modificar Alumno
+        </h2>
+
+        <form method="POST" class="space-y-4">
+
+            {{ form.hidden_tag() }}
+
+            <!-- ID -->
+            
+            <!-- Nombre -->
+            <div>
+                {{ form.nombre.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.nombre(class="w-full border border-gray-300 p-2 rounded mt-1") }}
+            </div>
+
+            <!-- Apellido -->
+            <div>
+                {{ form.apaterno.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.apaterno(class="w-full border border-gray-300 p-2 rounded mt-1") }}
+            </div>
+
+            <!-- Email -->
+            <div>
+                {{ form.email.label(class="block text-sm font-medium text-gray-700") }}
+                {{ form.email(class="w-full border border-gray-300 p-2 rounded mt-1") }}
+            </div>
+
+             <!-- Botones -->
+        <div class="flex justify-between mt-6">
+
+            <!-- Cancelar -->
+            <a href="{{ url_for('index') }}" style="background:red; color:white; padding:8px 16px; border-radius:6px;">
+    Cancelar
+</a>
+
+
+            <!-- Guardar -->
+            <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Guardar
+            </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

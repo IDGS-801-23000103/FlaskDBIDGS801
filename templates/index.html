@@ -54,15 +54,19 @@
 
     <td class="px-6 py-4 text-center">
 
-    <span style="color: teal; cursor: pointer;">
-        Editar
-    </span>
+    <a href="{{ url_for('detalles') }}?id={{ alum.id }}" 
+   style="color: teal; cursor: pointer;">
+    Editar
+</a>
+
 
     |
 
-    <span style="color: green; cursor: pointer;">
-        Modificar
-    </span>
+    <a href="{{ url_for('modificar') }}?id={{ alum.id }}" 
+   style="color: green; cursor: pointer;">
+    Modificar
+</a>
+
 
     |
 

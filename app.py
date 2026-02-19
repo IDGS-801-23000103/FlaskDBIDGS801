@@ -42,8 +42,6 @@ def alumnos():
                 db.session.add(nuevo_alumno)
                 db.session.commit()
 
-                flash("Alumno registrado correctamente ✅", "success")
-
                 # 🔥 limpiar formulario
                 return redirect(url_for("alumnos"))
 
@@ -55,6 +53,54 @@ def alumnos():
             flash("Error en el formulario ⚠️", "danger")
 
     return render_template("alumnos.html", form=form)
+
+
+
+@app.route("/detalles", methods=["GET"])
+def detalles():
+
+    id = request.args.get('id')
+
+    if id:
+        alum1 = db.session.query(Alumnos).filter(Alumnos.id == id).first()
+
+        if alum1:
+            return render_template(
+                'detalles.html',
+                id=alum1.id,
+                nombre=alum1.nombre,
+                apaterno=alum1.apaterno,
+                email=alum1.email
+            )
+
+    return redirect(url_for('index'))
+
+@app.route("/modificar", methods=["GET", "POST"])
+def modificar():
+
+    id = request.args.get('id')
+
+    if not id:
+        return redirect(url_for('index'))
+
+    alumno = Alumnos.query.get(id)
+
+    if not alumno:
+        return redirect(url_for('index'))
+
+    form = forms.UserForm2(obj=alumno)
+
+    if request.method == "POST" and form.validate():
+
+        alumno.nombre = form.nombre.data
+        alumno.apaterno = form.apaterno.data
+        alumno.email = form.email.data
+
+        db.session.commit()
+
+        return redirect(url_for('index'))
+
+    return render_template("modificar.html", form=form)
 
 
 with app.app_context():
