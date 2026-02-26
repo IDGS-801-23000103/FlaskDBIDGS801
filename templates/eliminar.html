@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block container %}
+
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+
+        <h2 class="text-2xl font-bold mb-6 text-center text-red-600">
+            Eliminar Alumno
+        </h2>
+
+        <p class="text-center text-gray-700 mb-4">
+            ¿Estás seguro que deseas eliminar este alumno?
+        </p>
+
+        <div class="mb-4 text-sm text-gray-600">
+            <p><strong>Nombre:</strong> {{ alumno.nombre }}</p>
+            <p><strong>Apaterno:</strong> {{ alumno.apaterno }}</p>
+            <p><strong>Email:</strong> {{ alumno.email }}</p>
+            <p><strong>Teléfono:</strong> {{ alumno.telefono }}</p>
+        </div>
+
+        <form method="POST">
+
+            {{ csrf_token() }}
+
+            <div class="flex justify-between mt-6">
+
+                <!-- Cancelar -->
+                <a href="{{ url_for('index') }}" 
+                   style="background:gray; color:white; padding:8px 16px; border-radius:6px;">
+                    Cancelar
+                </a>
+
+                <!-- Eliminar -->
+                <button type="submit"
+                    class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

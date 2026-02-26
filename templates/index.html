@@ -25,7 +25,7 @@
                 <tr>
                     <th class="px-6 py-3 text-center">ID</th>
                     <th class="px-6 py-3">Nombre</th>
-                    <th class="px-6 py-3">Apellido</th>
+                    <th class="px-6 py-3">Apaterno</th>
                     <th class="px-6 py-3">Email</th>
                     <th class="px-6 py-3 text-center">Acciones</th>
                 </tr>
@@ -70,9 +70,10 @@
 
     |
 
-    <span style="color: red; cursor: pointer;">
-        Eliminar
-    </span>
+<a href="{{ url_for('eliminar', id=alum.id) }}" 
+   style="color: red; cursor: pointer;">
+    Eliminar
+</a>
 
 </td>
 

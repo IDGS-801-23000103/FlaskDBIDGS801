@@ -3,6 +3,7 @@ from flask_wtf.csrf import CSRFProtect
 from config import DevelopmentConfig
 import forms
 from models import db, Alumnos
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
@@ -10,6 +11,7 @@ app.config['SECRET_KEY'] = 'mi_clave_super_secreta'
 
 db.init_app(app)
 csrf = CSRFProtect(app)
+migrate = Migrate(app, db)
 
 
 @app.errorhandler(404)
@@ -42,7 +44,7 @@ def alumnos():
                 db.session.add(nuevo_alumno)
                 db.session.commit()
 
-                # 🔥 limpiar formulario
+               
                 return redirect(url_for("alumnos"))
 
             except Exception as e:
@@ -102,6 +104,27 @@ def modificar():
 
     return render_template("modificar.html", form=form)
 
+
+@app.route("/eliminar", methods=["GET", "POST"])
+def eliminar():
+
+    id = request.args.get('id')
+
+    if not id:
+        return redirect(url_for('index'))
+
+    alumno = Alumnos.query.get(id)
+
+    if not alumno:
+        return redirect(url_for('index'))
+
+    if request.method == "POST":
+        db.session.delete(alumno)
+        db.session.commit()
+        flash("Alumno eliminado correctamente 🗑️", "success")
+        return redirect(url_for('index'))
+
+    return render_template("eliminar.html", alumno=alumno)
 
 with app.app_context():
     db.create_all()

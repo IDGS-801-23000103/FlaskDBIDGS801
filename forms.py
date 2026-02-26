@@ -11,7 +11,7 @@ class UserForm2(FlaskForm):
         Length(min=4, max=20, message='Requiere mínimo 4 y máximo 20')
     ])
 
-    apaterno = StringField('apaterno', [
+    apellidos = StringField('apellidos', [
         DataRequired(message='El apellido es requerido')
     ])
 
