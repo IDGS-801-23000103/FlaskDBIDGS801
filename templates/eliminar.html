@@ -15,14 +15,13 @@
 
         <div class="mb-4 text-sm text-gray-600">
             <p><strong>Nombre:</strong> {{ alumno.nombre }}</p>
-            <p><strong>Apaterno:</strong> {{ alumno.apaterno }}</p>
+            <p><strong>Apellido:</strong> {{ alumno.apellidos }}</p>
             <p><strong>Email:</strong> {{ alumno.email }}</p>
             <p><strong>Teléfono:</strong> {{ alumno.telefono }}</p>
         </div>
 
         <form method="POST">
-
-            {{ csrf_token() }}
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
             <div class="flex justify-between mt-6">
 
@@ -34,7 +33,7 @@
 
                 <!-- Eliminar -->
                 <button type="submit"
-                    class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+                    style="background:red; color:white; padding:8px 16px; border-radius:6px;">
                     Eliminar
                 </button>
 

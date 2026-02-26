@@ -37,15 +37,16 @@ def alumnos():
                 nuevo_alumno = Alumnos(
                    
                     nombre=form.nombre.data,
-                    apaterno=form.apaterno.data,
-                    email=form.email.data
+                    apellidos=form.apellidos.data,
+                    email=form.email.data,
+                    telefono=form.telefono.data
                 )
 
                 db.session.add(nuevo_alumno)
                 db.session.commit()
 
                
-                return redirect(url_for("alumnos"))
+                return redirect(url_for("index"))
 
             except Exception as e:
                 db.session.rollback()
@@ -71,8 +72,9 @@ def detalles():
                 'detalles.html',
                 id=alum1.id,
                 nombre=alum1.nombre,
-                apaterno=alum1.apaterno,
-                email=alum1.email
+                apellidos=alum1.apellidos,
+                email=alum1.email,
+                telefono=alum1.telefono
             )
 
     return redirect(url_for('index'))
@@ -95,8 +97,9 @@ def modificar():
     if request.method == "POST" and form.validate():
 
         alumno.nombre = form.nombre.data
-        alumno.apaterno = form.apaterno.data
+        alumno.apellidos = form.apellidos.data
         alumno.email = form.email.data
+        alumno.telefono = form.telefono.data
 
         db.session.commit()
 
@@ -121,7 +124,6 @@ def eliminar():
     if request.method == "POST":
         db.session.delete(alumno)
         db.session.commit()
-        flash("Alumno eliminado correctamente 🗑️", "success")
         return redirect(url_for('index'))
 
     return render_template("eliminar.html", alumno=alumno)

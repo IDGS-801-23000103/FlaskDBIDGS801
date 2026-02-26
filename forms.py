@@ -19,3 +19,4 @@ class UserForm2(FlaskForm):
         DataRequired(message='El correo es requerido'),
         Email(message='Ingresa un correo válido')
     ])
+    telefono = StringField("Teléfono")
