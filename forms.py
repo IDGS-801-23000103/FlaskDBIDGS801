@@ -5,18 +5,15 @@ from wtforms.validators import DataRequired, Length, NumberRange, Email
 
 class UserForm2(FlaskForm):
 
+    matricula = StringField("matricula")
    
-    nombre = StringField('nombre', [
-        DataRequired(message='El nombre es requerido'),
-        Length(min=4, max=20, message='Requiere mínimo 4 y máximo 20')
-    ])
+    nombre = StringField('nombre')
 
     apellidos = StringField('apellidos', [
         DataRequired(message='El apellido es requerido')
     ])
 
-    email = EmailField('correo', [
-        DataRequired(message='El correo es requerido'),
-        Email(message='Ingresa un correo válido')
-    ])
+    email = EmailField('correo')
     telefono = StringField("Teléfono")
+
+    especialidad = StringField('especialidad')

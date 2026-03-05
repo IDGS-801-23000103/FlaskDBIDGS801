@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block container %}
+
+<div class="flex justify-center mt-10">
+
+<div class="relative bg-neutral-primary-soft max-w-[260px] w-full p-4 border border-default rounded-base shadow-xs">
+
+        <div class="mb-4">
+            <a href="{{ url_for('maestros.listado_maestros') }}" 
+               class="text-fg-danger font-medium hover:underline">
+                ← Regresar a Maestros
+            </a>
+        </div>
+
+        <button id="dropdownButton" data-dropdown-toggle="dropdown"
+            class="absolute top-2 end-2 text-body hover:text-heading 
+            bg-neutral-primary-soft box-border border border-transparent 
+            hover:bg-neutral-tertiary focus:ring-4 focus:ring-neutral-tertiary 
+            rounded-base p-1.5 focus:outline-none" type="button">
+
+            <span class="sr-only">Open dropdown</span>
+
+            <svg class="w-6 h-6" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round"
+                    stroke-width="3"
+                    d="M6 12h.01m6 0h.01m5.99 0h.01"/>
+            </svg>
+        </button>
+
+        <div id="dropdown"
+            class="z-10 bg-neutral-primary-medium border 
+            border-default-medium rounded-base shadow-lg 
+            w-36 hidden">
+
+            <ul class="p-2 text-sm text-body font-medium"
+                aria-labelledby="dropdownButton">
+
+                <li>
+                    <a href="{{ url_for('maestros.modificar_maestro', matricula=maestro.matricula) }}" 
+                       class="inline-flex items-center w-full p-2 
+                       hover:bg-neutral-tertiary-medium 
+                       hover:text-heading rounded-md">
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('maestros.eliminar_maestro', matricula=maestro.matricula) }}" 
+                       class="inline-flex items-center w-full p-2 
+                       text-fg-danger hover:bg-neutral-tertiary-medium 
+                       rounded-md">
+                        Eliminar
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        
+       <div class="flex flex-col items-center text-center">
+
+    <img class="w-16 h-16 mb-3 rounded-full"
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        alt="Maestro"/>
+
+    <h5 class="text-base font-semibold text-heading leading-tight">
+        {{ maestro.nombre }} {{ maestro.apellidos }}
+    </h5>
+
+    <span class="text-xs text-body mt-1">
+        Matrícula: {{ maestro.matricula }}
+    </span>
+
+    <span class="text-xs text-body">
+        {{ maestro.email }}
+    </span>
+
+    <span class="text-xs text-body mb-3">
+        {{ maestro.especialidad }}
+    </span>
+
+    <div class="flex gap-2">
+
+        <a href="{{ url_for('maestros.modificar_maestro', matricula=maestro.matricula) }}"
+            class="text-xs bg-brand text-white px-3 py-1.5 rounded hover:bg-brand-strong transition">
+            Editar
+        </a>
+
+        <a href="{{ url_for('maestros.listado_maestros') }}"
+            class="text-xs bg-neutral-secondary-medium px-3 py-1.5 rounded hover:bg-neutral-tertiary-medium transition">
+            Volver
+        </a>
+
+    </div>
+
+</div>
+{% endblock %}

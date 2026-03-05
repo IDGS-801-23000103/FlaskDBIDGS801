@@ -1,95 +1,19 @@
 {% extends "layout.html" %}
-
 {% block container %}
 
-<div class="max-w-screen-xl mx-auto px-4 py-10">
+<style>
+    body {
+        margin: 0;
+        overflow: hidden; 
+        background: radial-gradient(circle, #1a2a4a 0%, #0d1a33 100%); 
+    }
+</style>
 
-    <!-- Botón superior -->
-    <div class="flex justify-end mb-6">
-        <a href="{{ url_for('alumnos') }}">
-            <button type="button"
-                class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 
-                hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
-                focus:ring-green-300 font-medium rounded-base 
-                text-sm px-5 py-2.5 text-center shadow-md transition">
-                Nuevo Alumno
-            </button>
-        </a>
-    </div>
-
-    <!-- Tabla -->
-    <div class="relative overflow-x-auto bg-white shadow-lg rounded-base border border-gray-200">
-        <table class="w-full text-sm text-left text-gray-600">
-
-            <thead class="text-xs uppercase bg-gray-100 text-gray-700 border-b">
-                <tr>
-                    <th class="px-6 py-3 text-center">ID</th>
-                    <th class="px-6 py-3">Nombre</th>
-                    <th class="px-6 py-3">Apellido</th>
-                    <th class="px-6 py-3">Email</th>
-                    <th class="px-6 py-3">Telefono</th>
-                    <th class="px-6 py-3 text-center">Acciones</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-{% for alum in alumno %}
-<tr class="bg-white border-b hover:bg-gray-50 transition">
-
-    <td class="px-6 py-4 text-center font-medium text-gray-900">
-        {{ alum.id }}
-    </td>
-
-    <td class="px-6 py-4">
-        {{ alum.nombre }}
-    </td>
-
-    <td class="px-6 py-4">
-        {{ alum.apellidos }}
-    </td>
-
-    <td class="px-6 py-4">
-        {{ alum.email }}
-    </td>
-    <td class="px-6 py-4">
-        {{ alum.telefono }}
-    </td>
-
-    <td class="px-6 py-4 text-center">
-
-    <a href="{{ url_for('detalles') }}?id={{ alum.id }}" 
-   style="color: teal; cursor: pointer;">
-    Editar
-</a>
-
-
-    |
-
-    <a href="{{ url_for('modificar') }}?id={{ alum.id }}" 
-   style="color: green; cursor: pointer;">
-    Modificar
-</a>
-
-
-    |
-
-<a href="{{ url_for('eliminar', id=alum.id) }}" 
-   style="color: red; cursor: pointer;">
-    Eliminar
-</a>
-
-</td>
-
-</tr>
-{% endfor %}
-
-</tbody>
-
-        </table>
-    </div>
-
+<div class="flex items-center justify-center min-h-screen px-10">
+    <h1 class="font-light tracking-tight text-white leading-none text-center select-none whitespace-nowrap"
+        style="font-size: 15vw; font-family: 'Playfair Display', serif;">
+        Bienvenidos
+    </h1>
 </div>
-
 
 {% endblock %}

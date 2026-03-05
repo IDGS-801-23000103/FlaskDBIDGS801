@@ -1,64 +1,98 @@
 {% extends "layout.html" %}
+
 {% block container %}
 
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
+<div class="max-w-screen-xl mx-auto px-4 py-10">
 
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-
-        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
-            Registro de Alumno
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">
+            Lista de Alumnos
         </h2>
 
-        <form method="POST" class="space-y-4">
+        <a href="{{ url_for('maestros.nuevo_alumno') }}">
+            <button type="button"
+                class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 
+                hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
+                focus:ring-green-300 font-medium rounded-base 
+                text-sm px-5 py-2.5 text-center shadow-md transition">
+                Nuevo Alumno
+            </button>
+        </a>
+    </div>
 
-            {{ form.hidden_tag() }}
+    <!-- Tabla -->
+    <div class="relative overflow-x-auto bg-white shadow-lg rounded-base border border-gray-200">
+        <table class="w-full text-sm text-left text-gray-600">
 
-            <!-- ID -->
-            
-            <!-- Nombre -->
-            <div>
-                {{ form.nombre.label(class="block text-sm font-medium text-gray-700") }}
-                {{ form.nombre(class="w-full border border-gray-300 p-2 rounded mt-1") }}
-            </div>
+            <thead class="text-xs uppercase bg-gray-100 text-gray-700 border-b">
+                <tr>
+                    <th class="px-6 py-3 text-center">ID</th>
+                    <th class="px-6 py-3">Nombre</th>
+                    <th class="px-6 py-3">Apellido</th>
+                    <th class="px-6 py-3">Email</th>
+                    <th class="px-6 py-3">Telefono</th>
+                    <th class="px-6 py-3 text-center">Acciones</th>
+                </tr>
+            </thead>
 
-            <!-- Apellido -->
-            <div>
-                {{ form.apellidos.label(class="block text-sm font-medium text-gray-700") }}
-                {{ form.apellidos(class="w-full border border-gray-300 p-2 rounded mt-1") }}
-            </div>
+            <tbody>
 
-            <!-- Email -->
-            <div>
-                {{ form.email.label(class="block text-sm font-medium text-gray-700") }}
-                {{ form.email(class="w-full border border-gray-300 p-2 rounded mt-1") }}
-            </div>
-            <!-- telefono -->
-            <div>
-                {{ form.telefono.label(class="block text-sm font-medium text-gray-700") }}
-                {{ form.telefono(class="w-full border border-gray-300 p-2 rounded mt-1") }}
-            </div>
+{% for alum in alumnos %}
+<tr class="bg-white border-b hover:bg-gray-50 transition">
 
-             <!-- Botones -->
-        <div class="flex justify-between mt-6">
+    <td class="px-6 py-4 text-center font-medium text-gray-900">
+        {{ alum.id }}
+    </td>
 
-            <!-- Cancelar -->
-            <a href="{{ url_for('index') }}" style="background:red; color:white; padding:8px 16px; border-radius:6px;">
-    Cancelar
+    <td class="px-6 py-4">
+        {{ alum.nombre }}
+    </td>
+
+    <td class="px-6 py-4">
+        {{ alum.apellidos }}
+    </td>
+
+    <td class="px-6 py-4">
+        {{ alum.email }}
+    </td>
+    <td class="px-6 py-4">
+        {{ alum.telefono }}
+    </td>
+
+    <td class="px-6 py-4 text-center">
+
+    <a href="{{ url_for('maestros.detalles', id=alum.id) }}"
+   style="color: teal; cursor: pointer;">
+    Editar
 </a>
 
 
-            <!-- Guardar -->
-            <button type="submit"
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-                Guardar
-            </button>
+    |
 
-            </div>
+    <a href="{{ url_for('maestros.modificar', id=alum.id) }}"
+   style="color: green; cursor: pointer;">
+    Modificar
+</a>
 
-        </form>
 
+    |
+
+<a href="{{ url_for('maestros.eliminar', id=alum.id) }}"
+   style="color: red; cursor: pointer;">
+    Eliminar
+</a>
+
+</td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+
+        </table>
     </div>
 
 </div>
+
 
 {% endblock %}
