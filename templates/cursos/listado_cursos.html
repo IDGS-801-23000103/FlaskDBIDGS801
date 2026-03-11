@@ -6,16 +6,16 @@
 
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-gray-800">
-            Lista de Maestros
+            Lista de Cursos
         </h2>
 
-        <a href="{{ url_for('maestros.nuevo_maestro') }}">
+        <a href="{{ url_for('cursos.nuevo_curso') }}">
             <button type="button"
                 class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 
                 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
                 focus:ring-green-300 font-medium rounded-base 
                 text-sm px-5 py-2.5 text-center shadow-md transition">
-                Nuevo Maestro
+                Nuevo Curso
             </button>
         </a>
     </div>
@@ -25,61 +25,58 @@
 
             <thead class="text-xs uppercase bg-gray-100 text-gray-700 border-b">
                 <tr>
-                    <th class="px-6 py-3 text-center">Matricula</th>
+                    <th class="px-6 py-3 text-center">ID</th>
                     <th class="px-6 py-3">Nombre</th>
-                    <th class="px-6 py-3">Apellido</th>
-                    <th class="px-6 py-3">Email</th>
-                    <th class="px-6 py-3">Especialidad</th>
+                    <th class="px-6 py-3">Maestro</th>
                     <th class="px-6 py-3 text-center">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
-                {% for maestro in maestros %}
-                
 
-</td>
+                {% for curso in cursos %}
+
                 <tr class="bg-white border-b hover:bg-gray-50 transition">
 
                     <td class="px-6 py-4 text-center font-medium text-gray-900">
-                        {{ maestro.matricula }}
+                        {{ curso.id }}
                     </td>
 
                     <td class="px-6 py-4">
-                        {{ maestro.nombre }}
+                        {{ curso.nombre }}
                     </td>
 
                     <td class="px-6 py-4">
-                        {{ maestro.apellidos }}
+                        {{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}
                     </td>
 
-                    <td class="px-6 py-4">
-                        {{ maestro.email }}
-                    </td>
-
-                    <td class="px-6 py-4">
-                        {{ maestro.especialidad }}
-                    </td>
                     <td class="px-6 py-3 text-center">
-<a href="{{ url_for('maestros.detalle_maestro', matricula=maestro.matricula) }}"
-   style="color: teal;">
-   Detalles
-</a>
-|
-<a href="{{ url_for('maestros.modificar_maestro', matricula=maestro.matricula) }}"
-   style="color: green;">
-   Modificar
-</a>
 
-|
+                        <a href="{{ url_for('cursos.detalle_curso', id=curso.id) }}"
+                           style="color: teal;">
+                           Detalle
+                        </a>
 
-<a href="{{ url_for('maestros.eliminar_maestro', matricula=maestro.matricula) }}"
-   style="color: red;">
-   Eliminar
-</a>
+                        |
+
+                        <a href="{{ url_for('cursos.modificar_curso', id=curso.id) }}"
+                           style="color: green;">
+                           Modificar
+                        </a>
+
+                        |
+
+                        <a href="{{ url_for('cursos.eliminar_curso', id=curso.id) }}"
+                           style="color: red;">
+                           Eliminar
+                        </a>
+
+                    </td>
 
                 </tr>
+
                 {% endfor %}
+
             </tbody>
 
         </table>

@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+
+<div class="bg-white p-6 rounded shadow w-full max-w-md">
+
+<h2 class="text-xl font-bold mb-4 text-center">
+Modificar Curso
+</h2>
+
+<form method="POST">
+
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+<div class="mb-3">
+<label class="block text-sm">Nombre</label>
+<input type="text" name="nombre"
+value="{{ curso.nombre }}"
+class="w-full border p-2 rounded">
+</div>
+
+<div class="mb-3">
+<label class="block text-sm">Maestro</label>
+
+<select name="maestro_id"
+class="w-full border p-2 rounded">
+
+{% for maestro in maestros %}
+
+<option value="{{ maestro.matricula }}"
+{% if curso.maestro_id == maestro.matricula %}
+selected
+{% endif %}
+>
+
+{{ maestro.nombre }} {{ maestro.apellidos }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="flex justify-between mt-4">
+
+<a href="{{ url_for('cursos.listado_cursos') }}"
+class="bg-gray-500 text-white px-4 py-2 rounded">
+Cancelar
+</a>
+
+<button type="submit"
+class="bg-blue-600 text-white px-4 py-2 rounded">
+Guardar
+</button>
+
+</div>
+
+</form>
+
+</div>
+</div>
+
+{% endblock %}

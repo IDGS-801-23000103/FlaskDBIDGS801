@@ -6,4 +6,5 @@ maestros=Blueprint(
     template_folder='templates',
     static_folder='static'
 )
-from.import routes
+
+from . import routes

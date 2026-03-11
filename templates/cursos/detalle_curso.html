@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="max-w-3xl mx-auto mt-4">
+
+<div class="mb-2">
+<a href="{{ url_for('cursos.listado_cursos') }}"
+class="text-red-500 text-xs hover:underline">
+← Regresar
+</a>
+</div>
+
+
+<div class="grid grid-cols-2 gap-3 mb-3">
+
+<div class="bg-white border rounded p-2 flex items-center gap-2">
+
+<img
+class="w-10 h-10"
+src="https://cdn-icons-png.flaticon.com/512/2436/2436874.png">
+
+<div>
+
+<h2 class="text-sm font-semibold">
+{{ curso.nombre }}
+</h2>
+
+<p class="text-xs text-gray-500">
+ID: {{ curso.id }}
+</p>
+
+</div>
+
+</div>
+
+
+<div class="bg-white border rounded p-2 flex items-center gap-2">
+
+<img
+class="w-10 h-10 rounded-full"
+src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
+
+<div>
+
+<p class="text-sm font-semibold">
+{{ curso.maestro.nombre }}
+</p>
+
+<p class="text-xs text-gray-500">
+{{ curso.maestro.especialidad }}
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="bg-white border rounded">
+
+<div class="flex justify-between items-center px-3 py-2 border-b">
+
+<h3 class="text-xs font-semibold">
+Alumnos inscritos
+</h3>
+
+<a href="{{ url_for('cursos.inscribir_alumno', id=curso.id) }}"
+class="bg-blue-600 text-white text-xs px-2 py-1 rounded">
+Inscribir
+</a>
+
+</div>
+
+
+<table class="w-full text-xs">
+
+<thead class="bg-gray-100 text-gray-600">
+<tr>
+
+<th class="px-2 py-1 text-left">Alumno</th>
+<th class="px-2 py-1 text-left">Email</th>
+<th class="px-2 py-1 text-center">Acción</th>
+
+</tr>
+</thead>
+
+<tbody>
+
+{% for alumno in curso.alumnos %}
+
+<tr class="border-b">
+
+<td class="px-2 py-1">
+{{ alumno.nombre }} {{ alumno.apellidos }}
+</td>
+
+<td class="px-2 py-1">
+{{ alumno.email }}
+</td>
+
+<td class="px-2 py-1 text-center">
+
+<a href="{{ url_for('cursos.quitar_alumno',
+curso_id=curso.id,
+alumno_id=alumno.id) }}"
+class="text-red-500 text-xs"
+onclick="return confirm('¿Seguro que deseas quitar este alumno del curso?')">
+Quitar
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}

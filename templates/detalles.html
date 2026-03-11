@@ -2,60 +2,79 @@
 
 {% block container %}
 
-<div class="flex justify-center mt-10">
+<div class="flex justify-center mt-6">
 
-<div class="relative bg-neutral-primary-soft max-w-[220px] w-full p-3 border border-default rounded-base shadow-sm">
+<div class="bg-neutral-primary-soft max-w-[220px] w-full p-3 border border-default rounded shadow-sm">
 
-        <!-- Botón regresar -->
-        <div class="mb-3">
+        <!-- Regresar -->
+        <div class="mb-1">
             <a href="{{ url_for('maestros.alumnos') }}" 
-               class="text-fg-danger text-sm font-medium hover:underline">
-                ← Regresar a Alumnos
+               class="text-fg-danger text-[11px] font-medium hover:underline">
+                ← Regresar
             </a>
         </div>
 
         <div class="flex flex-col items-center text-center">
 
-            <!-- Imagen -->
-            <!-- Imagen más pequeña -->
-    <img class="w-16 h-16 mb-3 rounded-full"
-        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-        alt="Maestro"/>
+            <!-- Imagen pequeña --> <img class="w-10 h-10 mb-1 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Alumno"/>
 
             <!-- Nombre -->
-            <h5 class="text-base font-semibold text-heading leading-tight">
-                {{ alumno.nombre }} {{ alumno.apellidos }}
+            <h5 class="text-sm font-bold text-heading">
+                 {{ alumno.nombre }} {{ alumno.apellidos }}
             </h5>
 
-            <!-- ID -->
-            <span class="text-xs text-body mt-1">
-                ID: {{ alumno.id }}
+            <span class="text-[10px] text-body mb-2">
+                <strong>ID:</strong> {{ alumno.id }}
             </span>
 
-            <!-- Email -->
-            <span class="text-xs text-body">
-                {{ alumno.email }}
-            </span>
+        </div>
 
-            <!-- Teléfono -->
-            <span class="text-xs text-body mb-3">
-                {{ alumno.telefono }}
-            </span>
+        <!-- Información -->
+        <div class="text-[11px] space-y-1">
 
-            <!-- Botones -->
-            <div class="flex gap-2">
+            <p>
+                <strong>Email:</strong><br>
+                <span class="break-words">{{ alumno.email }}</span>
+            </p>
 
-                <a href=""
-                    class="text-xs bg-brand text-white px-3 py-1.5 rounded hover:bg-brand-strong transition">
-                    Editar
-                </a>
+            <p>
+                <strong>Teléfono:</strong> {{ alumno.telefono }}
+            </p>
 
-                <a href="{{ url_for('maestros.alumnos') }}" 
-                    class="text-xs bg-neutral-secondary-medium px-3 py-1.5 rounded hover:bg-neutral-tertiary-medium transition">
-                    Volver
-                </a>
+            <!-- Cursos -->
+            <div>
+                <strong>Cursos:</strong>
+
+                {% if alumno.cursos %}
+                <div class="flex flex-wrap gap-1 mt-1 justify-center">
+
+                    {% for curso in alumno.cursos %}
+                    <span class="bg-blue-100 text-blue-700 px-2 py-[2px] rounded text-[10px] font-medium">
+                        {{ curso.nombre }}
+                    </span>
+                    {% endfor %}
+
+                </div>
+                {% else %}
+                    <p class="text-[10px]">No inscrito</p>
+                {% endif %}
 
             </div>
+
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-center gap-2 mt-3">
+
+            <a href="{{ url_for('maestros.modificar', id=alumno.id) }}"
+                class="text-[10px] bg-brand text-white px-2 py-1 rounded hover:bg-brand-strong">
+                Editar
+            </a>
+
+            <a href="{{ url_for('maestros.alumnos') }}"
+                class="text-[10px] bg-neutral-secondary-medium px-2 py-1 rounded hover:bg-neutral-tertiary-medium">
+                Volver
+            </a>
 
         </div>
 

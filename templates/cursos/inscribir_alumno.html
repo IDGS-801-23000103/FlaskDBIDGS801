@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="max-w-lg mx-auto bg-white p-8 shadow rounded">
+
+<h2 class="text-xl font-bold mb-6">
+Inscribir alumno a {{ curso.nombre }}
+</h2>
+{% if mensaje %}
+<div class="bg-red-100 text-red-700 p-2 rounded text-sm mb-3">
+    {{ mensaje }}
+</div>
+{% endif %}
+<form method="POST">
+
+{{ form.hidden_tag() }}
+
+<label class="block mb-2">Alumno</label>
+
+<select name="alumno_id"
+class="w-full border p-2 rounded mb-6">
+
+{% for alumno in alumnos %}
+
+<option value="{{ alumno.id }}">
+{{ alumno.nombre }} {{ alumno.apellidos }}
+</option>
+
+{% endfor %}
+
+</select>
+
+<button type="submit"
+class="bg-blue-600 text-white px-4 py-2 rounded">
+Inscribir
+</button>
+
+<a href="{{ url_for('cursos.detalle_curso', id=curso.id) }}"
+class="ml-4 text-gray-600">
+Cancelar
+</a>
+
+</form>
+
+</div>
+
+{% endblock %}

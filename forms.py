@@ -17,3 +17,6 @@ class UserForm2(FlaskForm):
     telefono = StringField("Teléfono")
 
     especialidad = StringField('especialidad')
+
+class InscripcionForm(FlaskForm):
+    pass

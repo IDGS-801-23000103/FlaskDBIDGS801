@@ -1,6 +1,6 @@
 from . import maestros
 from flask import render_template, request, redirect, url_for, flash
-from models import db, Alumnos, Maestros
+from models import db, Alumnos, Maestros, Curso, inscripcion
 import forms
 
 
@@ -87,7 +87,6 @@ def detalle_maestro(matricula):
         maestro=maestro
     )
 
-
 @maestros.route("/nuevo_maestro", methods=["GET", "POST"])
 def nuevo_maestro():
     form = forms.UserForm2()
@@ -95,8 +94,16 @@ def nuevo_maestro():
     if request.method == "POST":
         if form.validate():
 
+            matricula = request.form.get("matricula")
+
+            maestro_existente = Maestros.query.get(matricula)
+
+            if maestro_existente:
+                form.matricula.errors.append("La matrícula ya está registrada")
+                return render_template("maestros/form_maestro.html", form=form)
+
             nuevo = Maestros(
-                matricula=request.form.get("matricula"),
+                matricula=matricula,
                 nombre=form.nombre.data,
                 apellidos=form.apellidos.data,
                 email=form.email.data,
@@ -105,6 +112,7 @@ def nuevo_maestro():
 
             db.session.add(nuevo)
             db.session.commit()
+
 
             return redirect(url_for("maestros.listado_maestros"))
 
@@ -142,3 +150,10 @@ def eliminar_maestro(matricula):
         return redirect(url_for("maestros.listado_maestros"))
 
     return render_template("maestros/eliminar_maestro.html", maestro=maestro)
+
+@maestros.route("/cursos")
+def cursos():
+    lista = Curso.query.all()
+    return render_template("cursos/listado_cursos.html", cursos=lista)
+
+
